@@ -11,11 +11,6 @@ struct Point {
 
   Point() : x{0}, y{0} {}
   Point(int64_t xx, int64_t yy) : x{xx}, y{yy} {}
-  Point& operator=(const Point& p) {
-    x = p.x;
-    y = p.y;
-    return *this;
-  }
 
   static std::pair<Point, Point> readFrom(const std::string& s) {
     std::stringstream ss{s};
