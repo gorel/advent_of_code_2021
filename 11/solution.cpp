@@ -47,19 +47,16 @@ class Graph {
     return data_.at(row).at(col);
   }
 
-  int64_t getTotalFlashes() const {
-    return flashed_;
-  }
+  int64_t getTotalFlashes() const { return flashed_; }
 
-  int64_t getFirstSync() const {
-    return firstSync_;
-  }
+  int64_t getFirstSync() const { return firstSync_; }
 
   bool flashing(int64_t row, int64_t col) const {
     return data_.at(row).at(col) > '9';
   }
 
-  void boom(int64_t row, int64_t col, std::set<std::pair<int64_t, int64_t>>& flashed) {
+  void boom(int64_t row, int64_t col,
+            std::set<std::pair<int64_t, int64_t>>& flashed) {
     ++flashed_;
     flashed.insert({row, col});
     for (auto [newR, newC] : neighbors(row, col)) {
@@ -75,7 +72,7 @@ class Graph {
     for (int64_t i = 0; i < rowCount(); ++i) {
       for (int64_t j = 0; j < colCount(); ++j) {
         ++data_.at(i).at(j);
-        if (flashed.find({i,j}) == flashed.end() && flashing(i, j)) {
+        if (flashed.find({i, j}) == flashed.end() && flashing(i, j)) {
           boom(i, j, flashed);
         }
       }
@@ -97,14 +94,13 @@ class Graph {
     }
   }
 
-
   std::vector<std::pair<int64_t, int64_t>> neighbors(int64_t row, int64_t col) {
     std::vector<std::pair<int64_t, int64_t>> res;
     std::vector<std::pair<int64_t, int64_t>> dirs{
         {0, 1}, {0, -1}, {1, 0}, {-1, 0}, {-1, -1}, {1, 1}, {-1, 1}, {1, -1}};
     for (auto [r, c] : dirs) {
       if (inBounds(row + r, col + c)) {
-        res.push_back({row+r, col+c});
+        res.push_back({row + r, col + c});
       }
     }
     return res;
