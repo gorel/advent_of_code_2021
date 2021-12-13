@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
 
@@ -19,6 +20,17 @@ std::vector<std::string> readLines(std::string fileName) {
     lines.push_back(std::move(line));
   }
   return lines;
+}
+
+std::vector<std::string> split(const std::string& s, char delim) {
+  std::vector<std::string> res;
+  std::stringstream ss{s};
+  while (ss.good()) {
+    std::string val;
+    getline(ss, val, delim);
+    res.push_back(std::move(val));
+  }
+  return res;
 }
 
 int64_t solve1(std::vector<std::string> lines) {
