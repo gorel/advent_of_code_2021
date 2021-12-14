@@ -72,11 +72,9 @@ struct Point {
 namespace std {
 template <>
 struct hash<Point> {
-  size_t operator()(const Point& p) const {
-    return p.x << 4 | p.y;
-  }
+  size_t operator()(const Point& p) const { return p.x << 4 | p.y; }
 };
-} // namespace std
+}  // namespace std
 
 int64_t solve1(std::vector<std::string> lines) {
   std::unordered_set<Point> points;
